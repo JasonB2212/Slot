@@ -1882,7 +1882,9 @@
                 const bet = parseInt(this.elements.betInput.value, 10);
                 this.spinCount++;
                 this.updateLimitNotice();
+                if (!this.inFreeSpinMode) {
                 this.balance -= bet;
+                }
                 this.updateDisplays();
                 
                 this.elements.message.textContent = '🎰 Die Walzen drehen sich...';
