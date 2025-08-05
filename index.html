@@ -1576,6 +1576,9 @@
 
             updateDisplays() {
                 this.elements.balance.textContent = `${this.balance.toLocaleString('de-DE')} Credits`;
+                if (this.balance > this.highscore) {
+                this.highscore = this.balance;
+            }
                 this.elements.highscore.textContent = `${this.highscore.toLocaleString('de-DE')} Credits`;
                 this.saveGameState();
                 this.checkAchievements();
@@ -2835,3 +2838,4 @@
     </script>
 </body>
 </html>
+
