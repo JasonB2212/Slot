@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slotmaschine - HAWKS</title>
+    <title>Slotmaschine - GoodLack</title>
     <style>
         * {
             box-sizing: border-box;
@@ -921,6 +921,125 @@
             animation: coinRain 3s linear;
             z-index: 9999;
         }
+
+        /* ==== MOBILE OPTIMIERUNG FÜR SMARTPHONES ==== */
+         @media (max-width: 600px) {
+        .slot-layout {
+            padding: 10px;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            text-align: center;
+        }
+
+        .slot-machine-wrapper {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .slot-machine {
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .reel-window {
+            width: 50px;
+            height: 150px;
+        }
+
+        .symbol {
+            font-size: 32px;
+            height: 50px;
+        }
+
+        .lever {
+            height: 80px;
+            width: 12px;
+        }
+
+        .lever::after {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+        }
+
+        .controls {
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .controls input,
+        .controls button {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .info-displays {
+            grid-template-columns: 1fr;
+        }
+
+        .volume-control {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .gamble-buttons {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .progressive-jackpot,
+        .multiplier-display {
+            font-size: 1em;
+            padding: 10px;
+        }
+
+        .line-group {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .password-modal input {
+            width: 100%;
+        }
+
+        .prob-row {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .prob-row input {
+            width: 100%;
+        }
+
+        .wheel-result {
+            font-size: 1.2em;
+        }
+
+        .lucky-wheel {
+            width: 280px;
+            height: 280px;
+        }
+
+        .wheel-center {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5em;
+        }
+
+        .jackpot-amount {
+            font-size: 2em;
+        }
+
+        .btn {
+            font-size: 14px;
+            padding: 10px 16px;
+        }
+    }
+
     </style>
 </head>
 <body>
@@ -2715,6 +2834,4 @@
         });
     </script>
 </body>
-
 </html>
-
