@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slotmaschine - GoodLack</title>
+    <title>Slotmaschine - HAWKS</title>
     <style>
         * {
             box-sizing: border-box;
@@ -1038,7 +1038,13 @@
             font-size: 14px;
             padding: 10px 16px;
         }
-    }
+        }
+
+            .controls input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
 
     </style>
 </head>
@@ -1974,7 +1980,7 @@
             completeSpin() {
                 this.spinIsRunning = false;
                 this.updateSpinButtonState();
-                this.elements.betInput.disabled = false;
+                this.elements.betInput.disabled = this.inFreeSpinMode;
             }
 
             evaluateAllLines(symbolsForLines, bet) {
@@ -2125,12 +2131,18 @@
                     resultText = `🎉 Gewinn: ${payout.toLocaleString('de-DE')} Credits`;
                     if (this.multiplierActive) resultText += ` (x${this.currentMultiplier})`;
                     
-                    if (!this.inFreeSpinMode) {
-                        this.balance += payout;
-                        this.showGambleOptions(payout);
-                    } else {
-                        this.totalFreeSpinWinnings += payout;
-                    }
+                    if (this.inFreeSpinMode) {
+                    this.totalFreeSpinWinnings += payout;
+                    return {
+                        text: '', 
+                        winSymbols: [],
+                        payout: 0
+                    };
+                } else {
+                    this.balance += payout;
+                    this.showGambleOptions(payout);
+                }
+
                 }
 
                 // Consolation prize for two matching symbols at start
@@ -2277,15 +2289,19 @@
                 }
             }
 
-            updateFreeSpinUI() {
-                if (this.inFreeSpinMode) {
-                    this.elements.freeSpinStats.style.display = 'block';
-                    this.elements.freeSpinStats.textContent = `🎰 Freispiele: ${this.freeSpins} verbleibend | Aktuelle Gewinne: ${this.totalFreeSpinWinnings.toLocaleString('de-DE')} Credits`;
-                } else {
-                    this.elements.freeSpinStats.style.display = 'none';
-                    this.elements.freeSpinStats.textContent = '';
-                }
-            }
+                  updateFreeSpinUI() {
+                  if (this.inFreeSpinMode) {
+                      this.elements.freeSpinStats.style.display = 'block';
+                      this.elements.freeSpinStats.textContent = `🎰 Freispiele: ${this.freeSpins} verbleibend | Aktuelle Gewinne: ${this.totalFreeSpinWinnings.toLocaleString('de-DE')} Credits`;
+                  } else {
+                      this.elements.freeSpinStats.style.display = 'none';
+                      this.elements.freeSpinStats.textContent = '';
+                  }
+
+                  // Einsatzfeld aktivieren/deaktivieren abhängig vom Freispiel-Modus
+                  this.elements.betInput.disabled = this.inFreeSpinMode;
+              }
+
 
             updateStats(bet, payout) {
                 this.stats.totalSpins++;
