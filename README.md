@@ -20,6 +20,29 @@ Alle Inhalte sind entweder:
 - selbst erstellt,
 - oder lizenzfrei nutzbar (z. B. CC0, MIT, Public Domain).
 
+- ## 🎵 Verwendete Soundeffekte (unter Creative Commons Lizenz)
+
+Folgende Sounds wurden in diesem Projekt verwendet und stammen von [freesound.org](https://freesound.org).  
+Sie sind lizenziert unter **Creative Commons Attribution 3.0 (CC BY 3.0)** und dürfen mit Namensnennung genutzt werden:
+
+- 🎰 **Slot machine win** – von [sagetyrtle](https://freesound.org/people/sagetyrtle/sounds/118239/)  
+  [CC BY 3.0 Lizenz](https://creativecommons.org/licenses/by/3.0/)
+
+- 💰 **Casino Win 2** – von [menegass](https://freesound.org/people/menegass/sounds/69682/)  
+  [CC BY 3.0 Lizenz](https://creativecommons.org/licenses/by/3.0/)
+
+- 🎤 **Audience applause + shout** – von [martian](https://freesound.org/people/martian/sounds/637820/)  
+  [CC BY 3.0 Lizenz](https://creativecommons.org/licenses/by/3.0/)
+
+- 🎵 **Retro Arcade Background Loop** – von [DrMinky](https://freesound.org/people/DrMinky/sounds/654264/)  
+  [CC BY 3.0 Lizenz](https://creativecommons.org/licenses/by/3.0/)
+
+---
+
+Alle Rechte verbleiben bei den jeweiligen Urhebern.  
+Die Nutzung erfolgt gemäß den Bedingungen der [Creative Commons BY 3.0 Lizenz](https://creativecommons.org/licenses/by/3.0/).
+
+
 Solltest du urheberrechtliche Bedenken haben, kannst du dich jederzeit an den Projektverantwortlichen wenden.
 
 ## 📦 Technologien
