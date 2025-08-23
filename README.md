@@ -40,9 +40,9 @@ Dieses Projekt steht **ohne Lizenzdatei** – du kannst den Code frei anschauen,
 ---
 
 ## 🎵 Assets: Sounds & Grafiken
-- 🎶 **Sounds** stammen von [Pixabay](https://pixabay.com/sound-effects/) und sind lizenzfrei unter der [Pixabay Lizenz](https://pixabay.com/service/license/).  
-  Das bedeutet: frei nutzbar für private & kommerzielle Zwecke, **kein Quellenhinweis erforderlich**, aber Erwähnung erwünscht.  
-  Beispiele: Slot-Reel-Sound, Gewinn-Sound, Button-Klick-Sound  
+- 🎶 **Sounds** stammen von [Freesound](https://freesound.org) und sind lizenzfrei.  
+  Das bedeutet: frei nutzbar für private Zwecke, **kein Quellenhinweis erforderlich**, aber Erwähnung erwünscht.  
+  Beispiele: Slot-Reel-Sound, Gewinn-Sound, usw.
 
 - 🖼️ **Icons & Symbole** (z. B. 🍒, 🍋, 🔔) sind Unicode-Emojis → frei nutzbar.  
 - Falls zusätzliche Bilder (z. B. Hintergrund) genutzt werden: ebenfalls aus **lizenzfreien Quellen** (Pixabay, Unsplash, Pexels).  
