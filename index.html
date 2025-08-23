@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slotmaschine - HAWKS</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="theme-casino">
+    <div class="page">
+      <!-- HUD oben rechts -->
+      <div class="corner-hud">
+        <div id="multiplierBadge" class="multiplier-badge">
+          🔥 <span id="multiplierBadgeValue">x2 • 10 Spins</span>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="topbar">
+        <h1 class="title">🎰 Slotmaschine</h1>
+        <div class="header-jackpot">
+          <div class="jackpot-label">🎰 Progressive Jackpot</div>
+          <div id="progressiveAmount" class="jackpot-amount shimmer-text">0 Credits</div>
+        </div>
+      </div>
+
+      <!-- Info-Leiste -->
+      <div class="info-strip">
+        <div class="card"><h3>💰 Guthaben</h3><div id="balance" class="value">…</div></div>
+        <div class="card"><h3>🏆 Highscore</h3><div id="highscore" class="value">…</div></div>
+        <div class="card"><h3>📊 Stats</h3><div id="statsDisplay" class="value" style="text-align:center; font-size: var(--font-sm);"> Spins: 0 | Gewinne: 0 | Verluste: 0 <br> Gesamt-Einsatz: 0 | Gesamt-Gewinn: 0 | Winrate: 0% </div></div>
+      </div>
+
+      <!-- Hauptlayout -->
+      <div class="main" id="slot-machine-container">
+        <!-- Links -->
+        <div class="left-panel">
+          <div id="lineSelection" class="panel line-buttons">
+            <div class="line-label" style="font-weight:bold; color: var(--brand); margin-bottom:8px;">🎯 Gewinnlinien</div>
+            <div class="line-group">
+              <button class="line-toggle active" data-line="0">Oben</button>
+              <button class="line-toggle active" data-line="1">Mitte</button>
+              <button class="line-toggle active" data-line="2">Unten</button>
+              <button class="line-toggle active" data-line="3">↘ Diagonal</button>
+              <button class="line-toggle active" data-line="4">↖ Diagonal</button>
+            </div>
+          </div>
+          <div id="freeSpinStats" class="panel" style="display:none;"></div>
+
+          <div class="panel">
+            <div id="autoSpinStatus" class="autospin-status" style="text-align:center; color:#ccc;"></div>
+            <div id="limitNotice" class="limit-notice" style="display:none;"></div>
+          </div>
+
+          <div class="panel history-container">
+            <strong style="color: var(--brand); font-size:var(--font-md);">🏆 Gewinnhistorie</strong>
+            <ul id="historyList" class="history-list"></ul>
+          </div>
+
+          <!-- Admin Wahrscheinlichkeiten -->
+          <div id="probabilities" class="panel probabilities-panel" style="display:none;">
+            <h3 style="color:var(--brand); margin:0 0 10px 0; text-align:center;">🎯 Wahrscheinlichkeiten (%)</h3>
+            <div class="prob-row"><span>🔥🔥🔥 Totalschaden:</span><input type="number" step="0.1" id="prob1" value="0.02"></div>
+            <div class="prob-row"><span>🔥🔥🏎️ Halber Verlust:</span><input type="number" step="0.1" id="prob2" value="0.08"></div>
+            <div class="prob-row"><span>6️⃣9️⃣🏎️ Jackpot:</span><input type="number" step="0.1" id="prob3" value="0.6"></div>
+            <div class="prob-row"><span>🦄🦄🦄 Hochgewinn:</span><input type="number" step="0.1" id="prob4" value="0.7"></div>
+            <div class="prob-row"><span>📖📖📖 Bücher (Freispiele):</span><input type="number" step="0.1" id="probBook" value="1.2"></div>
+            <div class="prob-row"><span>🎁🎁🎁 Mystery Box:</span><input type="number" step="0.1" id="probMystery" value="1.4"></div>
+            <hr style="border:0;border-top:1px solid #444;margin:10px 0;">
+            <div class="prob-row"><span>3 Gleiche (x1):</span><input type="number" step="0.1" id="prob5" value="6.0"></div>
+            <div class="prob-row"><span>4 Gleiche (x2):</span><input type="number" step="0.1" id="prob8" value="1.2"></div>
+            <div class="prob-row"><span>5 Gleiche (x5):</span><input type="number" step="0.1" id="prob9" value="0.5"></div>
+            <div class="prob-row"><span>69 🍒 Kombo (x4):</span><input type="number" step="0.1" id="prob6" value="2.2"></div>
+            <div class="prob-row"><span>2 Gleiche (Trostrunde):</span><input type="number" step="0.1" id="prob7" value="7.0"></div>
+            <small style="display:block;margin-top:8px;color:#ccc;">⚠️ Summe sollte ≤ 100% sein</small>
+            <div id="probSum" style="margin-top:6px;font-size:var(--font-sm);color:#0f0;font-weight:bold;">Summe: 20.9%</div>
+          </div>
+        </div>
+
+        <!-- Mitte -->
+        <div class="slot-center">
+          <div class="slot-machine">
+            <div class="reel-window"><div class="reel-strip" id="reel1"></div></div>
+            <div class="reel-window"><div class="reel-strip" id="reel2"></div></div>
+            <div class="reel-window"><div class="reel-strip" id="reel3"></div></div>
+            <div class="reel-window"><div class="reel-strip" id="reel4"></div></div>
+            <div class="reel-window"><div class="reel-strip" id="reel5"></div></div>
+          </div>
+
+          <div class="under-slot">
+            <div class="bet-group">
+              <label for="betInput">💸 Einsatz</label>
+              <input type="number" id="betInput" min="1" value="100"><span>Credits</span>
+            </div>
+
+            <div class="bet-summary" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--panel-brd); background:var(--panel-bg); border-radius:12px;">
+              <div>🧭 Linien: <strong id="activeLinesCount">5</strong></div>
+              <div>💸 Effektiver Einsatz: <strong id="effectiveBet">500</strong></div>
+            </div>
+
+            <button id="spinButton" class="btn btn-primary">🎰 Drehen</button>
+            <button id="autoSpinButton" class="btn btn-success">🔄 Autospin starten</button>
+            <button id="resetButton" class="btn btn-danger">🔄 Reset</button>
+            <button id="ladderButton" class="btn btn-ladder">🪜 Hochdrücken</button>
+
+            <!-- Theme-Wechsler -->
+            <div class="theme-switcher">
+              <button class="theme-btn" data-theme="casino" title="Casino"><div class="dot" style="color:#FFD700;"></div><span>Casino</span></button>
+              <button class="theme-btn" data-theme="de" title="Deutschland"><div class="dot" style="color:#c4002f;"></div><span>Deutschland</span></button>
+              <button class="theme-btn" data-theme="at" title="Österreich"><div class="dot" style="color:#ff2d2d;"></div><span>Österreich</span></button>
+              <button class="theme-btn" data-theme="fr" title="Frankreich"><div class="dot" style="color:#2e66ff;"></div><span>Frankreich</span></button>
+              <button class="theme-btn" data-theme="cz" title="Tschechien"><div class="dot" style="color:#1a73e8;"></div><span>Tschechien</span></button>
+            </div>
+
+            <div class="lever" id="lever" title="Zieh den Hebel!"></div>
+
+            <div class="panel message" id="message"> 🎯 Willkommen! Setze deinen Einsatz und drehe die Walzen. Viel Glück! </div>
+          </div>
+        </div>
+
+        <!-- Rechts -->
+        <div class="right-panel">
+          <div id="gambleArea" class="panel gamble-area" style="display:none;">
+            <h3 style="color: var(--brand); text-align:center; margin: 0 0 10px;">🎲 Risiko – Verdoppeln oder Vervierfachen?</h3>
+            <div class="gamble-buttons">
+              <button id="gambleRed" class="btn">🔴 Rot (x2)</button>
+              <button id="gambleBlack" class="btn">⚫ Schwarz (x2)</button>
+            </div>
+            <div class="gamble-buttons">
+              <button class="gambleSuit btn" data-suit="♥️">♥️ (x4)</button>
+              <button class="gambleSuit btn" data-suit="♦️">♦️ (x4)</button>
+              <button class="gambleSuit btn" data-suit="♣️">♣️ (x4)</button>
+              <button class="gambleSuit btn" data-suit="♠️">♠️ (x4)</button>
+            </div>
+            <div id="gambleResult" style="margin-top:8px; font-weight:bold; text-align:center; color: var(--gold);"></div>
+          </div>
+
+          <div class="panel">
+            <h3 style="margin:0 0 8px; color: var(--gold); text-align:center;">🏆 Achievements</h3>
+            <div id="achievementsList"></div>
+          </div>
+
+          <div id="themeLockMsg" style="font-size: var(--font-sm); color:#ccc; min-height:18px;"></div>
+        </div>
+      </div>
+
+      <!-- Lautstärke -->
+      <div class="volume-fixed">
+        <span id="muteToggle" style="cursor:pointer; font-size:1.2em; color: var(--brand);">🔊</span>
+        <label style="color: var(--brand); font-weight:bold;">Lautstärke</label>
+        <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.3">
+      </div>
+
+      <!-- Audio -->
+      <audio id="sound-spin" src="https://cdn.freesound.org/previews/118/118239_1430216-lq.mp3" preload="auto"></audio>
+      <audio id="sound-jackpot" src="https://cdn.freesound.org/previews/69/69682_866625-lq.mp3" preload="auto"></audio>
+      <audio id="sound-fala" src="https://cdn.freesound.org/previews/637/637820_612689-lq.mp3" preload="auto"></audio>
+      <audio id="sound-bg" src="https://cdn.freesound.org/previews/654/654264_13782861-lq.mp3" preload="auto" loop style="display:none"></audio>
+
+      <!-- Modale -->
+      <div id="passwordOverlay" class="password-overlay" style="display:none; position:fixed; inset:0; background: rgba(0,0,0,.9); align-items:center; justify-content:center; z-index:9999;">
+        <div class="password-modal" style="background: linear-gradient(145deg,#2a2a3e,#1a1a2e); padding: 30px; border:2px solid var(--brand); border-radius:16px; text-align:center;">
+          <h3 style="color:var(--brand); margin:0 0 10px;">🔒 Admin-Zugang</h3>
+          <p style="color:#ccc; margin:0 0 14px;">Passwort eingeben:</p>
+          <input type="password" id="pwInput" placeholder="••••••••" style="padding:12px; font-size:16px; border:2px solid var(--brand); border-radius:8px; width:200px; background: rgba(255,255,255,.1); color:#fff; text-align:center;">
+          <br><br>
+          <button id="pwSubmit" class="btn btn-primary">Bestätigen</button>
+        </div>
+      </div>
+
+      <div id="mysteryBox" class="mystery-box" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%,-50%); background: linear-gradient(145deg, var(--gold), #FFA500); border: 3px solid #FF6347; border-radius: 20px; padding: 24px; text-align:center; z-index: 1000; box-shadow: 0 0 50px rgba(255,215,0,.8);">
+        <h3 style="color:#8B0000; font-size: clamp(18px,2.6vh,28px); margin:0 0 10px;">🎁 Mystery Box! 🎁</h3>
+        <div id="mysteryPrize" class="prize" style="font-size: clamp(26px,4vh,40px); margin:10px 0;">?</div>
+        <p id="mysteryText" style="color:#8B0000; font-size: var(--font-md); margin:0 0 8px;"></p>
+        <button onclick="window.slotMachine.closeMysteryBox()" class="btn btn-primary" style="margin-top:10px;">OK</button>
+      </div>
+
+      <div id="luckyWheelContainer" class="lucky-wheel-container" style="display:none; position:fixed; inset:0; background: rgba(0,0,0,.9); align-items:center; justify-content:center; z-index:2000;">
+        <div class="wheel-pointer" style="position:absolute; top:10vh; left:50%; transform: translateX(-50%); width:0; height:0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid #8B0000;"></div>
+        <div id="luckyWheel" class="lucky-wheel" style="width: min(70vw, 420px); height: min(70vw, 420px); border-radius:50%; background: conic-gradient(var(--gold) 0deg 45deg, #FF6347 45deg 90deg, #4CAF50 90deg 135deg, #1E90FF 135deg 180deg, var(--gold) 180deg 225deg, #FF6347 225deg 270deg, #4CAF50 270deg 315deg, #1E90FF 315deg 360deg); border: 10px solid var(--gold); box-shadow: 0 0 50px rgba(255,215,0,.8); position:relative; transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);">
+          <div class="wheel-center" onclick="spinWheel()" style="position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); width: 80px; height:80px; background: linear-gradient(145deg, var(--gold), #FFA500); border-radius:50%; border:5px solid #8B0000; display:flex; align-items:center; justify-content:center; font-size:2em; cursor:pointer; z-index:10;">🎯</div>
+        </div>
+        <div style="position:absolute; bottom:50px; text-align:center; width:100%;">
+          <h2 style="color: var(--gold); text-shadow:2px 2px 4px rgba(0,0,0,.8); margin:0;">🎡 Glücksrad - Klicke zum Drehen! 🎡</h2>
+          <p id="wheelResult" style="color:#fff; font-size: clamp(16px,2.4vh,22px); margin-top:10px;"></p>
+        </div>
+      </div>
+
+      <!-- 🪜 Leiter Overlay -->
+      <div id="ladderOverlay" class="ladder-overlay" aria-hidden="true">
+        <div class="ladder-panel">
+          <div class="ladder-header">
+            <div class="ladder-title">🪜 Leiter – Hochdrücken</div>
+            <div class="ladder-cap">
+              Max: <strong id="ladderCap">0</strong> • Start: <strong id="ladderStart">0</strong>
+            </div>
+          </div>
+          <div id="ladderList" class="ladder-list"></div>
+          <div class="ladder-actions">
+            <button id="ladderUp" class="btn btn-up">⬆️ Hoch</button>
+            <button id="ladderTake" class="btn btn-take">✅ Nehmen</button>
+            <button id="ladderCancel" class="btn btn-cancel">❌ Abbruch</button>
+          </div>
+          <div id="ladderFoot" class="ladder-foot">50 / 50 Chance pro Schritt. Autospin ist währenddessen gesperrt.</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="slotmachine.js"></script>
+  </body>
+</html>
