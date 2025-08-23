@@ -47,8 +47,6 @@ Dieses Projekt steht **ohne Lizenzdatei** – du kannst den Code frei anschauen,
 - 🖼️ **Icons & Symbole** (z. B. 🍒, 🍋, 🔔) sind Unicode-Emojis → frei nutzbar.  
 - Falls zusätzliche Bilder (z. B. Hintergrund) genutzt werden: ebenfalls aus **lizenzfreien Quellen** (Pixabay, Unsplash, Pexels).  
 
-👉 Wenn du eigene Sounds oder Bilder nutzt, prüfe immer die jeweilige Lizenz!
-
 ---
 
 ## 🚀 Live-Demo
